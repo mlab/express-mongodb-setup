@@ -8,7 +8,7 @@ initializeDatabases(function(err, dbs) {
   if (err) {
     console.error('Failed to make all database connections!');
     console.error(err);
-    throw err;
+    process.exit(1);
   }
 
   // Initialize the application once database connections are ready.
