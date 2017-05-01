@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 
-var initializeDatabases = require('./db-connections');
+var initializeDatabases = require('./dbs');
 var routes = require('./routes');
 
 initializeDatabases(function(err, dbs) {

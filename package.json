@@ -1,0 +1,24 @@
+{
+  "name": "express-mongodb-setup",
+  "version": "1.0.0",
+  "description": "It's common for Express developers to define routes in a separate file from the main Express app (`app.js` or `server.js`). Although our connection pooling blog post teaches developers to reuse a database connection, it's not clear how to implement database connection sharing across multiple files. This is a simple example that demonstrates how to set up MongoDB connections in an Express app so that the database connection can be used across multiple files.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mongolab/express-mongodb-setup.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mongolab/express-mongodb-setup/issues"
+  },
+  "homepage": "https://github.com/mongolab/express-mongodb-setup#readme",
+  "dependencies": {
+    "async": "^2.4.0",
+    "express": "^4.15.2",
+    "mongodb": "^2.2.26"
+  }
+}
