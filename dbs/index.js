@@ -1,4 +1,3 @@
-const async = require('async')
 const MongoClient = require('mongodb').MongoClient
 
 // Note: A production application should not expose database credentials in plain text.
