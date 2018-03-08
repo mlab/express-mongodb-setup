@@ -1,16 +1,20 @@
-var async = require('async');
-var MongoClient = require('mongodb').MongoClient;
+const async = require('async')
+const MongoClient = require('mongodb').MongoClient
 
 // Note: A production application should not expose database credentials in plain text.
 // For strategies on handling credentials, visit 12factor: https://12factor.net/config.
-var PROD_URI = "mongodb://<dbuser>:<dbpassword>@<host1>:<port1>,<host2>:<port2>/<dbname>?replicaSet=<replicaSetName>";
-var MKTG_URI = "mongodb://<dbuser>:<dbpassword>@<host1>:<port1>,<host2>:<port2>/<dbname>?replicaSet=<replicaSetName>";
+const PROD_URI = "mongodb://<dbuser>:<dbpassword>@<host1>:<port1>,<host2>:<port2>/<dbname>?replicaSet=<replicaSetName>"
+const MKTG_URI = "mongodb://<dbuser>:<dbpassword>@<host1>:<port1>,<host2>:<port2>/<dbname>?replicaSet=<replicaSetName>"
 
-var databases = {
-  production: async.apply(MongoClient.connect, PROD_URI),
-  marketing: async.apply(MongoClient.connect, MKTG_URI)
-};
+function connect(url) {
+  return MongoClient.connect(url).then(client => client.db())
+}
 
-module.exports = function (cb) {
-  async.parallel(databases, cb);
-};
+module.exports = async function() {
+  let databases = await Promise.all([connect(PROD_URI), connect(MKTG_URI)])
+
+  return {
+    production: databases[0],
+    marketing: databases[1]
+  }
+}
